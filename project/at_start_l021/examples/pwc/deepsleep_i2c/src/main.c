@@ -226,6 +226,9 @@ int main(void)
     
     /* reduce ldo before enter deepsleep mode */
     pwc_ldo_output_voltage_set(PWC_LDO_OUTPUT_1V0);
+	
+	/* congfig the voltage regulator mode.only used with deep sleep mode */
+    pwc_voltage_regulate_set(PWC_REGULATOR_LOW_POWER);
 
     /* enter deep sleep mode */
     pwc_deep_sleep_mode_enter(PWC_DEEP_SLEEP_ENTER_WFI);
@@ -257,6 +260,9 @@ int main(void)
     
     /* reduce ldo before enter deepsleep mode */
     pwc_ldo_output_voltage_set(PWC_LDO_OUTPUT_1V0);
+	
+	/* congfig the voltage regulator mode.only used with deep sleep mode */
+    pwc_voltage_regulate_set(PWC_REGULATOR_LOW_POWER);
 
     /* enter deep sleep mode */
     pwc_deep_sleep_mode_enter(PWC_DEEP_SLEEP_ENTER_WFI);
@@ -301,7 +307,7 @@ void i2c_lowlevel_init(i2c_handle_type* hi2c)
     exint_init_struct.line_select        = EXINT_LINE_23;
     exint_init_struct.line_enable        = TRUE;
     exint_init_struct.line_polarity      = EXINT_TRIGGER_RISING_EDGE;
-    exint_init_struct.line_mode          = EXINT_LINE_INTERRUPUT;
+    exint_init_struct.line_mode          = EXINT_LINE_INTERRUPT;
     exint_init(&exint_init_struct);
     
     /* pwc periph clock enable */
@@ -321,7 +327,7 @@ void i2c_lowlevel_init(i2c_handle_type* hi2c)
     gpio_init_structure.gpio_drive_strength = GPIO_DRIVE_STRENGTH_STRONGER;
     gpio_init_structure.gpio_mode           = GPIO_MODE_MUX;
     gpio_init_structure.gpio_out_type       = GPIO_OUTPUT_OPEN_DRAIN;
-    gpio_init_structure.gpio_pull           = GPIO_PULL_UP;
+    gpio_init_structure.gpio_pull           = GPIO_PULL_NONE;
 
     gpio_init_structure.gpio_pins           = I2Cx_SCL_GPIO_PIN;
     gpio_init(I2Cx_SCL_GPIO_PORT, &gpio_init_structure);

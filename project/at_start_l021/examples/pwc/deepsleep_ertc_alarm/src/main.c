@@ -91,7 +91,7 @@ void ertc_alarm_config(void)
   /* config the exint line of the ertc alarm */
   exint_init_struct.line_select   = EXINT_LINE_17;
   exint_init_struct.line_enable   = TRUE;
-  exint_init_struct.line_mode     = EXINT_LINE_INTERRUPUT;
+  exint_init_struct.line_mode     = EXINT_LINE_INTERRUPT;
   exint_init_struct.line_polarity = EXINT_TRIGGER_RISING_EDGE;
   exint_init(&exint_init_struct);
 
@@ -166,9 +166,6 @@ int main(void)
   /* enable pwc and bpr clock */
   crm_periph_clock_enable(CRM_PWC_PERIPH_CLOCK, TRUE);
 
-  /* congfig the voltage regulator mode.only used with deep sleep mode */
-  pwc_voltage_regulate_set(PWC_REGULATOR_LOW_POWER);
-
   /* congfig the system clock */
   system_clock_config();
 
@@ -207,6 +204,9 @@ int main(void)
     pwc_ldo_output_voltage_set(PWC_LDO_OUTPUT_1V0);
     
     ertc_flag_clear(ERTC_ALAF_FLAG);
+	
+	/* congfig the voltage regulator mode.only used with deep sleep mode */
+    pwc_voltage_regulate_set(PWC_REGULATOR_LOW_POWER);
 
     /* enter deep sleep mode */
     pwc_deep_sleep_mode_enter(PWC_DEEP_SLEEP_ENTER_WFI);
