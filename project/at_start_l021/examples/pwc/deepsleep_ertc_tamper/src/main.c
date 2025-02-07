@@ -169,7 +169,7 @@ int main(void)
     }
     
     /* reduce ldo before enter deepsleep mode */
-    pwc_ldo_output_voltage_set(PWC_LDO_OUTPUT_1V0);
+    pwc_ldo_output_voltage_set(PWC_LDO_OUTPUT_1V1);
     
     ertc_flag_clear(ERTC_TP1F_FLAG);
 	

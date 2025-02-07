@@ -204,7 +204,7 @@ int main(void)
     }
     
     /* reduce ldo before enter deepsleep mode */
-    pwc_ldo_output_voltage_set(PWC_LDO_OUTPUT_1V0);
+    pwc_ldo_output_voltage_set(PWC_LDO_OUTPUT_1V1);
 
 	while(usart_flag_get(USART1, USART_TDC_FLAG) == RESET)
 	{

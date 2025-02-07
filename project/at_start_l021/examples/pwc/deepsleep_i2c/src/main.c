@@ -225,7 +225,7 @@ int main(void)
     }
     
     /* reduce ldo before enter deepsleep mode */
-    pwc_ldo_output_voltage_set(PWC_LDO_OUTPUT_1V0);
+    pwc_ldo_output_voltage_set(PWC_LDO_OUTPUT_1V1);
 	
 	/* congfig the voltage regulator mode.only used with deep sleep mode */
     pwc_voltage_regulate_set(PWC_REGULATOR_LOW_POWER);
@@ -259,7 +259,7 @@ int main(void)
     }
     
     /* reduce ldo before enter deepsleep mode */
-    pwc_ldo_output_voltage_set(PWC_LDO_OUTPUT_1V0);
+    pwc_ldo_output_voltage_set(PWC_LDO_OUTPUT_1V1);
 	
 	/* congfig the voltage regulator mode.only used with deep sleep mode */
     pwc_voltage_regulate_set(PWC_REGULATOR_LOW_POWER);

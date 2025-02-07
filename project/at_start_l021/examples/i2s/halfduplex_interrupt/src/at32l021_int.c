@@ -24,11 +24,6 @@
 
 /* includes ------------------------------------------------------------------*/
 #include "at32l021_int.h"
-#include "at32l021_board.h"
-
-extern uint16_t i2s1_buffer_tx[];
-extern uint16_t i2s2_buffer_rx[];
-extern __IO uint32_t tx_index, rx_index;
 
 /** @addtogroup AT32L021_periph_examples
   * @{
@@ -85,37 +80,6 @@ void PendSV_Handler(void)
   */
 void SysTick_Handler(void)
 {
-}
-
-
-/**
-  * @brief  This function handles the spi2 interrupt request.
-  * @param  None
-  * @retval None
-  */
- void SPI2_IRQHandler(void)
-{
-  if(spi_i2s_interrupt_flag_get(SPI2, SPI_I2S_RDBF_FLAG) != RESET)
-  {
-    i2s2_buffer_rx[rx_index++] = spi_i2s_data_receive(SPI2);
-  }
-}
-
-/**
-  * @brief  This function handles the spi3 interrupt request.
-  * @param  None
-  * @retval None
-  */
-void SPI1_IRQHandler(void)
-{
-  if(spi_i2s_interrupt_flag_get(SPI1, SPI_I2S_TDBE_FLAG) != RESET)
-  {
-    spi_i2s_data_transmit(SPI1, i2s1_buffer_tx[tx_index++]);
-    if(tx_index == 32)
-    {
-      spi_i2s_interrupt_enable(SPI1, SPI_I2S_TDBE_INT, FALSE);
-    }
-  }
 }
 
 /**
